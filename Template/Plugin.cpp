@@ -1,17 +1,11 @@
 ﻿#include "pch.h"
-#include <EventAPI.h>
-#include <LoggerAPI.h>
-#include <MC/Level.hpp>
-#include <MC/BlockInstance.hpp>
-#include <MC/Block.hpp>
-#include <MC/BlockSource.hpp>
-#include <MC/Actor.hpp>
-#include <MC/Player.hpp>
-#include <MC/ItemStack.hpp>
+#include "Config.hpp"
 #include <LLAPI.h>
+#include <LoggerAPI.h>
+
 Logger logger("Hunter");
+Config setting;
 
-void PluginInit()
-{
-
+void PluginInit() {
+	setting = Config::Load();
 }

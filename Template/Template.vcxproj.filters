@@ -16,6 +16,18 @@
     <Filter Include="Source\Config">
       <UniqueIdentifier>{2d17d91d-60c6-4f47-8123-9f112749d290}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Utils">
+      <UniqueIdentifier>{c536c32e-6754-4841-a4bf-96940cdbd959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Database">
+      <UniqueIdentifier>{413e6889-507e-4613-9be8-b04d730bf105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Command">
+      <UniqueIdentifier>{e0a63817-b234-4fca-988f-c746d95eff5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Events">
+      <UniqueIdentifier>{b70b8136-e428-4eef-86f5-8cfe19114203}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -40,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="Plugin.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="HunterUtils.cpp">
+      <Filter>Source\Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
