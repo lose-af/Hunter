@@ -14,7 +14,7 @@ Player* getDamageSrc(ActorDamageSource* src) {
 	auto owner = ac->getOwner();
 	if (owner && owner->isPlayer())
 		return (Player*)owner;
-	return (Player*)owner;
+	return 0;
 
 }
 
