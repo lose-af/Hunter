@@ -1,22 +1,12 @@
 name: MSBuild
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: .
-
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
-
-permissions:
-  contents: read
+  Platform: X64
+  ChakraCore_version: cc_windows_all_1_11_24
 
 jobs:
   build:
@@ -24,7 +14,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-  
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1
+     
+    - name: Pull submodule
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: FetchSDK.cmd
+      shell: cmd
+     
     - name: Download Server
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: |
@@ -37,9 +35,6 @@ jobs:
     - name: Build Library
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: |
-        git clone https://github.com/LiteLDev/LiteLoaderSDK.git
-        ls
-        mv ./LiteLoaderSDK/* ./SDK
         cd SDK/Tools
         mkdir ../LiteLoader
         mkdir ../LiteLoader/Lib
@@ -48,16 +43,12 @@ jobs:
       shell: bash
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
-
-    - name: Restore NuGet packages
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+      uses: microsoft/setup-msbuild@v1
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: |
-        MSBuild.exe ./Hunter.sln -property:Configuration=Release
+        MSBuild.exe ./LiteLoaderMOD.sln -property:Configuration=Release
       shell: bash
     
     - name: MkDirs
@@ -71,10 +62,11 @@ jobs:
     - name: Copy Out Files
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: |
-        ls
-        cp D:/Desktop/mc/plugins/*.dll D:/out/plugins
-        cp D:/Desktop/mc/plugins/*.lib D:/out/sdk/Lib
-        cp D:/Desktop/mc/plugins/*.pdb D:/out/plugins
+        cp x64/Release/*.dll D:/out/plugins
+        cp x64/Release/*.lib D:/out/sdk/Lib
+        cp x64/Release/*.pdb D:/out/plugins
+        cp LLMoney/LLMoney.h D:/out/sdk/Header
+        cp -r plugins/* D:/out/plugins
       shell: bash
 
     - name: Upload plugins
@@ -83,7 +75,15 @@ jobs:
         name: plugins
         path: D:/out/plugins
 
+    - name: Upload SDK
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: SDK
+        path: D:/out/sdk
+
     - name: Compress to zip
+      if: startsWith(github.ref, 'refs/tags/')
       run: |
         7z a D:/out/plugins.zip D:/out/plugins
+        7z a D:/out/SDK.zip D:/out/sdk
       shell: bash
