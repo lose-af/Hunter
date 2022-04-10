@@ -42,6 +42,15 @@
     <ClInclude Include="global.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="HunterUtils.h">
+      <Filter>Source\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Source\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="HunterCommands.h">
+      <Filter>Source\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -55,6 +64,18 @@
     </ClCompile>
     <ClCompile Include="HunterUtils.cpp">
       <Filter>Source\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Source\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="MobDIeEv.cpp">
+      <Filter>Source\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="HunterCommands.cpp">
+      <Filter>Source\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJoinEv.cpp">
+      <Filter>Source\Events</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
