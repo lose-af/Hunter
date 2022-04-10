@@ -48,7 +48,7 @@ jobs:
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: |
-        MSBuild.exe ./LiteLoaderMOD.sln -property:Configuration=Release
+        MSBuild.exe ./Hunter.sln -property:Configuration=Release
       shell: bash
     
     - name: MkDirs
@@ -65,7 +65,6 @@ jobs:
         cp x64/Release/*.dll D:/out/plugins
         cp x64/Release/*.lib D:/out/sdk/Lib
         cp x64/Release/*.pdb D:/out/plugins
-        cp LLMoney/LLMoney.h D:/out/sdk/Header
         cp -r plugins/* D:/out/plugins
       shell: bash
 
