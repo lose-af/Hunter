@@ -65,7 +65,6 @@ jobs:
         cp x64/Release/*.dll D:/out/plugins
         cp x64/Release/*.lib D:/out/sdk/Lib
         cp x64/Release/*.pdb D:/out/plugins
-        cp -r plugins/* D:/out/plugins
       shell: bash
 
     - name: Upload plugins
