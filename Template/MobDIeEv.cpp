@@ -27,8 +27,10 @@ THook(void, "?die@Mob@@UEAAXAEBVActorDamageSource@@@Z",
 		}
 		auto range = setting.getRewardByMobType(self->getTypeName());
 		auto gain = Hunter::makeRandom(range);
+                if (gain) {
 		Hunter::addTodayGain(pl, gain);
 		pl->sendText(tr("hunter.player.killmob", std::to_string(gain)));
-	}
+	        }
+}
 	return original(self, src);
 }
