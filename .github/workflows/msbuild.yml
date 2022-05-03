@@ -35,9 +35,13 @@ jobs:
     - name: Build Library
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: |
+        mv ./SDK/Header/LLMoney.h ./LLMoney.h
+        mv ./SDK/Lib/LLMoney.lib ./LLMoney.lib
         rm -rf ./SDK/*
         git clone https://github.com/LiteLDev/LiteLoaderSDK.git
         mv -f ./LiteLoaderSDK/* ./SDK
+        mv ./LLMoney.h ./SDK/Header/
+        mv ./LLMoney.lib ./SDK/Lib/LLMoney.lib
         cd SDK/Tools
         mkdir ../LiteLoader
         mkdir ../LiteLoader/Lib
